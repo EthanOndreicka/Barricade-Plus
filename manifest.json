@@ -1,0 +1,58 @@
+{
+  "manifest_version": 3,
+  "name": "Barricade Plus",
+  "version": "1.0.0",
+  "description": "Custom themes, sounds, stats, keybinds, and auto-features for barricade.gg",
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "notifications",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://barricade.gg/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://barricade.gg/*"],
+      "js": ["modules/sounds.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://barricade.gg/*"],
+      "js": [
+        "modules/theme.js",
+        "modules/ui.js",
+        "modules/keybinds.js",
+        "modules/stats.js",
+        "modules/auto.js",
+        "content.js"
+      ],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_page": "options/options.html",
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Barricade Plus",
+    "default_icon": {
+      "16": "assets/icons/icon16.png",
+      "48": "assets/icons/icon48.png",
+      "128": "assets/icons/icon128.png"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/sounds/*", "assets/icons/*"],
+      "matches": ["https://barricade.gg/*"]
+    }
+  ]
+}

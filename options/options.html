@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barricade Enhancer — Settings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@500;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="layout">
+
+    <!-- Sidebar nav -->
+    <nav class="sidebar">
+      <div class="sidebar-brand">
+        <span class="brand-icon">⚡</span>
+        <div>
+          <div class="brand-name">Barricade</div>
+          <div class="brand-sub">Enhancer</div>
+        </div>
+      </div>
+
+      <ul class="nav-list">
+        <li class="nav-item active" data-tab="theme">
+          <span class="nav-icon">🎨</span> Theme
+        </li>
+        <li class="nav-item" data-tab="sounds">
+          <span class="nav-icon">🔊</span> Sounds
+        </li>
+        <li class="nav-item" data-tab="ui">
+          <span class="nav-icon">🖼️</span> UI Additions
+        </li>
+        <li class="nav-item" data-tab="keybinds">
+          <span class="nav-icon">⌨️</span> Keybinds
+        </li>
+        <li class="nav-item" data-tab="stats">
+          <span class="nav-icon">📊</span> Stats
+        </li>
+        <li class="nav-item" data-tab="auto">
+          <span class="nav-icon">🤖</span> Auto
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <button id="btn-save" class="btn-save">Save Changes</button>
+        <div id="save-status" class="save-status"></div>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="content">
+
+      <!-- ── THEME TAB ─────────────────────────────────────────────────── -->
+      <section class="tab-panel active" id="tab-theme">
+        <div class="tab-header">
+          <h1>Theme</h1>
+          <p>Customize the look of barricade.gg with color presets or your own palette.</p>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-row">
+            <label class="setting-label">Enable Theme</label>
+            <label class="switch">
+              <input type="checkbox" id="theme-enabled">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="setting-group" id="theme-options">
+          <h2 class="group-title">Color Preset</h2>
+          <div class="preset-grid">
+            <label class="preset-card" data-preset="midnight">
+              <input type="radio" name="preset" value="midnight">
+              <div class="preset-swatch">
+                <div style="background:#7c5cbf"></div>
+                <div style="background:#0a0a12"></div>
+                <div style="background:#bf5c7c"></div>
+              </div>
+              <span>Midnight</span>
+            </label>
+            <label class="preset-card" data-preset="forest">
+              <input type="radio" name="preset" value="forest">
+              <div class="preset-swatch">
+                <div style="background:#4a9e4a"></div>
+                <div style="background:#0a120a"></div>
+                <div style="background:#9e9e4a"></div>
+              </div>
+              <span>Forest</span>
+            </label>
+            <label class="preset-card" data-preset="ember">
+              <input type="radio" name="preset" value="ember">
+              <div class="preset-swatch">
+                <div style="background:#e05c3a"></div>
+                <div style="background:#120a0a"></div>
+                <div style="background:#e0aa3a"></div>
+              </div>
+              <span>Ember</span>
+            </label>
+            <label class="preset-card" data-preset="ice">
+              <input type="radio" name="preset" value="ice">
+              <div class="preset-swatch">
+                <div style="background:#3ab0e0"></div>
+                <div style="background:#0a0f14"></div>
+                <div style="background:#e03a7c"></div>
+              </div>
+              <span>Ice</span>
+            </label>
+            <label class="preset-card" data-preset="custom">
+              <input type="radio" name="preset" value="custom">
+              <div class="preset-swatch custom-swatch">
+                <span>✏️</span>
+              </div>
+              <span>Custom</span>
+            </label>
+          </div>
+
+          <div id="custom-colors" class="custom-colors hidden">
+            <h2 class="group-title">Custom Colors</h2>
+            <div class="color-grid">
+              <div class="color-row"><label>Background Primary</label><input type="color" data-color="bgPrimary"></div>
+              <div class="color-row"><label>Background Secondary</label><input type="color" data-color="bgSecondary"></div>
+              <div class="color-row"><label>Card / Panel</label><input type="color" data-color="bgCard"></div>
+              <div class="color-row"><label>Accent</label><input type="color" data-color="accent"></div>
+              <div class="color-row"><label>Accent Hover</label><input type="color" data-color="accentHover"></div>
+              <div class="color-row"><label>Text</label><input type="color" data-color="text"></div>
+              <div class="color-row"><label>Muted Text</label><input type="color" data-color="textMuted"></div>
+              <div class="color-row"><label>Border</label><input type="color" data-color="border"></div>
+              <div class="color-row"><label>Player One</label><input type="color" data-color="playerOne"></div>
+              <div class="color-row"><label>Player Two</label><input type="color" data-color="playerTwo"></div>
+              <div class="color-row"><label>Barricade Piece</label><input type="color" data-color="barricade"></div>
+              <div class="color-row"><label>Board Cell (Light)</label><input type="color" data-color="boardLight"></div>
+              <div class="color-row"><label>Board Cell (Dark)</label><input type="color" data-color="boardDark"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── SOUNDS TAB ────────────────────────────────────────────────── -->
+      <section class="tab-panel" id="tab-sounds">
+        <div class="tab-header">
+          <h1>Sound Mods</h1>
+          <p>Replace any game sound with your own audio file. Paste a recognizable part of the original sound's URL, then upload a replacement.</p>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-row">
+            <label class="setting-label">Enable Sound Mods</label>
+            <label class="switch">
+              <input type="checkbox" id="sounds-enabled">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="setting-row">
+            <label class="setting-label">Mute All</label>
+            <label class="switch">
+              <input type="checkbox" id="sounds-muted">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="setting-row">
+            <label class="setting-label">Master Volume</label>
+            <div class="range-wrap">
+              <input type="range" id="sounds-volume" min="0" max="100" step="1">
+              <span id="sounds-volume-val">100%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <h2 class="group-title">Sound Mappings</h2>
+          <p class="group-desc">Each mapping replaces a sound whose URL contains the given pattern. Find patterns by opening DevTools → Network tab → filter by "media" on barricade.gg while a sound plays.</p>
+
+          <div id="sound-mappings-list"></div>
+
+          <button id="btn-add-mapping" class="btn-outline">+ Add Sound Mapping</button>
+        </div>
+      </section>
+
+      <!-- ── UI TAB ────────────────────────────────────────────────────── -->
+      <section class="tab-panel" id="tab-ui">
+        <div class="tab-header">
+          <h1>UI Additions</h1>
+          <p>Toggle injected overlays, panels, and visual enhancements.</p>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-row">
+            <div class="setting-info">
+              <label class="setting-label">Stats Overlay</label>
+              <span class="setting-desc">Win/loss tracker panel on the game screen</span>
+            </div>
+            <label class="switch"><input type="checkbox" id="ui-statsOverlay"><span class="slider"></span></label>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <label class="setting-label">Move History</label>
+              <span class="setting-desc">Scrollable list of moves in the current game</span>
+            </div>
+            <label class="switch"><input type="checkbox" id="ui-moveHistory"><span class="slider"></span></label>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <label class="setting-label">Board Coordinates</label>
+              <span class="setting-desc">A–H column letters and row numbers on the board</span>
+            </div>
+            <label class="switch"><input type="checkbox" id="ui-boardCoordinates"><span class="slider"></span></label>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <label class="setting-label">Turn Indicator Banner</label>
+              <span class="setting-desc">Flash "Your turn!" on screen when it's your move</span>
+            </div>
+            <label class="switch"><input type="checkbox" id="ui-turnIndicator"><span class="slider"></span></label>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <h2 class="group-title">Stats Overlay Position</h2>
+          <div class="radio-group">
+            <label class="radio-card"><input type="radio" name="overlay-pos" value="top-right"> Top Right</label>
+            <label class="radio-card"><input type="radio" name="overlay-pos" value="top-left"> Top Left</label>
+            <label class="radio-card"><input type="radio" name="overlay-pos" value="bottom-right"> Bottom Right</label>
+            <label class="radio-card"><input type="radio" name="overlay-pos" value="bottom-left"> Bottom Left</label>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── KEYBINDS TAB ─────────────────────────────────────────────── -->
+      <section class="tab-panel" id="tab-keybinds">
+        <div class="tab-header">
+          <h1>Keybinds</h1>
+          <p>Click any field and press your desired shortcut to record it.</p>
+        </div>
+
+        <div class="setting-group">
+          <div class="keybind-row">
+            <label>Toggle Theme</label>
+            <input type="text" class="keybind-input" id="kb-toggleTheme" readonly placeholder="Click to record">
+          </div>
+          <div class="keybind-row">
+            <label>Toggle Stats Overlay</label>
+            <input type="text" class="keybind-input" id="kb-toggleStats" readonly placeholder="Click to record">
+          </div>
+          <div class="keybind-row">
+            <label>Toggle Move History</label>
+            <input type="text" class="keybind-input" id="kb-showHistory" readonly placeholder="Click to record">
+          </div>
+          <div class="keybind-row">
+            <label>Toggle Mute</label>
+            <input type="text" class="keybind-input" id="kb-toggleMute" readonly placeholder="Click to record">
+          </div>
+          <div class="keybind-row">
+            <label>Quick Rematch</label>
+            <input type="text" class="keybind-input" id="kb-quickRematch" readonly placeholder="Click to record">
+          </div>
+        </div>
+
+        <div class="hint">Press <kbd>Escape</kbd> to clear a shortcut.</div>
+      </section>
+
+      <!-- ── STATS TAB ─────────────────────────────────────────────────── -->
+      <section class="tab-panel" id="tab-stats">
+        <div class="tab-header">
+          <h1>Stats</h1>
+          <p>Your game history, tracked automatically.</p>
+        </div>
+
+        <div class="stats-board" id="stats-display">
+          <div class="stat-card"><div class="stat-num" id="stat-games">—</div><div class="stat-name">Games</div></div>
+          <div class="stat-card"><div class="stat-num" id="stat-wins">—</div><div class="stat-name">Wins</div></div>
+          <div class="stat-card"><div class="stat-num" id="stat-losses">—</div><div class="stat-name">Losses</div></div>
+          <div class="stat-card"><div class="stat-num" id="stat-winrate">—</div><div class="stat-name">Win Rate</div></div>
+          <div class="stat-card"><div class="stat-num" id="stat-streak">—</div><div class="stat-name">Streak</div></div>
+          <div class="stat-card"><div class="stat-num" id="stat-avgmoves">—</div><div class="stat-name">Avg Moves</div></div>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-row">
+            <label class="setting-label">Track Stats</label>
+            <label class="switch"><input type="checkbox" id="stats-trackEnabled"><span class="slider"></span></label>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <h2 class="group-title">Recent Games</h2>
+          <div id="game-history-list" class="game-history"></div>
+        </div>
+
+        <button id="btn-reset-stats" class="btn-danger">Reset All Stats</button>
+      </section>
+
+      <!-- ── AUTO TAB ─────────────────────────────────────────────────── -->
+      <section class="tab-panel" id="tab-auto">
+        <div class="tab-header">
+          <h1>Auto Features</h1>
+          <p>Automated actions and notifications.</p>
+        </div>
+
+        <div class="setting-group">
+          <h2 class="group-title">Auto-Rematch</h2>
+          <div class="setting-row">
+            <div class="setting-info">
+              <label class="setting-label">Enable Auto-Rematch</label>
+              <span class="setting-desc">Automatically click the rematch button after each game</span>
+            </div>
+            <label class="switch"><input type="checkbox" id="auto-autoRematch"><span class="slider"></span></label>
+          </div>
+          <div class="setting-row" id="rematch-delay-row">
+            <label class="setting-label">Delay Before Rematch</label>
+            <div class="range-wrap">
+              <input type="range" id="auto-rematchDelay" min="500" max="10000" step="500">
+              <span id="auto-rematchDelay-val">3s</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <h2 class="group-title">Desktop Notifications</h2>
+          <div class="setting-row">
+            <label class="setting-label">Enable Notifications</label>
+            <label class="switch"><input type="checkbox" id="auto-desktopNotifications"><span class="slider"></span></label>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <label class="setting-label">Notify on Game End</label>
+              <span class="setting-desc">Win/loss result when a game concludes</span>
+            </div>
+            <label class="switch"><input type="checkbox" id="auto-notifyGameEnd"><span class="slider"></span></label>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <label class="setting-label">Notify on Opponent Move</label>
+              <span class="setting-desc">Alert when the opponent makes their move</span>
+            </div>
+            <label class="switch"><input type="checkbox" id="auto-notifyOpponentMove"><span class="slider"></span></label>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <label class="setting-label">Notify on Your Turn</label>
+              <span class="setting-desc">Alert when it's your turn to move</span>
+            </div>
+            <label class="switch"><input type="checkbox" id="auto-notifyTurnStart"><span class="slider"></span></label>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

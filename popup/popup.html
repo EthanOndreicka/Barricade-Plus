@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barricade Enhancer</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup">
+    <header class="popup-header">
+      <div class="popup-logo">⚡</div>
+      <div class="popup-title">
+        <span class="popup-name">Barricade</span>
+        <span class="popup-sub">Enhancer</span>
+      </div>
+    </header>
+
+    <div class="popup-section">
+      <div class="toggle-row" id="toggle-theme">
+        <div class="toggle-info">
+          <span class="toggle-icon">🎨</span>
+          <span class="toggle-label">Theme</span>
+        </div>
+        <div class="toggle-switch" data-key="theme.enabled">
+          <div class="toggle-knob"></div>
+        </div>
+      </div>
+
+      <div class="toggle-row" id="toggle-sounds">
+        <div class="toggle-info">
+          <span class="toggle-icon">🔊</span>
+          <span class="toggle-label">Sound Mods</span>
+        </div>
+        <div class="toggle-switch" data-key="sounds.enabled">
+          <div class="toggle-knob"></div>
+        </div>
+      </div>
+
+      <div class="toggle-row" id="toggle-stats">
+        <div class="toggle-info">
+          <span class="toggle-icon">📊</span>
+          <span class="toggle-label">Stats Overlay</span>
+        </div>
+        <div class="toggle-switch" data-key="ui.statsOverlay">
+          <div class="toggle-knob"></div>
+        </div>
+      </div>
+
+      <div class="toggle-row" id="toggle-auto">
+        <div class="toggle-info">
+          <span class="toggle-icon">🔄</span>
+          <span class="toggle-label">Auto-Rematch</span>
+        </div>
+        <div class="toggle-switch" data-key="auto.autoRematch">
+          <div class="toggle-knob"></div>
+        </div>
+      </div>
+
+      <div class="toggle-row" id="toggle-mute">
+        <div class="toggle-info">
+          <span class="toggle-icon">🔇</span>
+          <span class="toggle-label">Mute Sounds</span>
+        </div>
+        <div class="toggle-switch" data-key="sounds.muted">
+          <div class="toggle-knob"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="popup-actions">
+      <button id="btn-open-options" class="btn-primary">⚙️ Full Settings</button>
+    </div>
+
+    <div class="popup-footer">
+      <span id="active-site-status"></span>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

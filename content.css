@@ -1,0 +1,480 @@
+/* content.css — Barricade Enhancer injected styles
+   Selectors verified against real barricade.gg DOM (Tailwind + data-tutorial attrs) */
+
+/* ── Page background & text ───────────────────────────────────────────── */
+body, html {
+  background-color: var(--be-bg-primary) !important;
+  color: var(--be-text) !important;
+}
+
+/* ── Board shell ──────────────────────────────────────────────────────── */
+[data-tutorial="board"] {
+  background-color: var(--be-bg-secondary) !important;
+  box-shadow: 0 0 0 1px var(--be-border), 0 20px 60px rgba(0,0,0,0.5) !important;
+}
+
+/* ── Regular board cells ──────────────────────────────────────────────── */
+/* Must match ALL child divs that are cells (bg-gray-50 class). Using a broad
+   child selector scoped to the board is more reliable than class-matching,
+   since the board's direct children are ONLY cells and slot overlays.
+   Cells sit at even grid positions (2,4,6…); slot divs have ids.            */
+[data-tutorial="board"] > div:not([id]):not([class*="font-mono"]):not([class*="bg-gray-4"]) {
+  background-color: var(--be-board-light) !important;
+  border-color: var(--be-border) !important;
+}
+
+/* Alternate cell shade — every other column of cells */
+[data-tutorial="board"] > div:not([id]):not([class*="font-mono"]):not([class*="bg-gray-4"]):nth-child(even) {
+  background-color: var(--be-board-dark) !important;
+}
+
+/* Hover */
+[data-tutorial="board"] > div:not([id]):not([class*="font-mono"]):not([class*="bg-gray-4"]):hover {
+  background-color: var(--be-board-hover) !important;
+}
+
+/* ── Goal row cells ───────────────────────────────────────────────────── */
+[data-tutorial="goal-row"] {
+  background-color: var(--be-goal-row) !important;
+  border-color: var(--be-goal-border) !important;
+}
+[data-tutorial="goal-row"]:hover {
+  background-color: var(--be-goal-hover) !important;
+}
+
+/* ── Legal move highlights ────────────────────────────────────────────── */
+[data-tutorial="legal-move"] {
+  background-color: var(--be-legal-move) !important;
+  box-shadow: 0 0 0 2px var(--be-accent) !important;
+  --tw-ring-color: var(--be-accent) !important;
+}
+[data-tutorial="legal-move"]:hover {
+  background-color: var(--be-legal-hover) !important;
+}
+
+/* ── Player pawns ─────────────────────────────────────────────────────── */
+/* Your pawn: red circle inside the pawn wrapper */
+[data-tutorial="player-pawn"] .bg-red-500,
+[data-tutorial="player-pawn"] .bg-red-600,
+[data-tutorial="player-pawn"] [class*="bg-red"] {
+  background-color: var(--be-player-one) !important;
+  box-shadow: 0 0 14px var(--be-player-one), 0 0 4px rgba(0,0,0,0.8) !important;
+}
+
+/* Opponent pawn: blue circle */
+[data-tutorial="player-pawn"] .bg-blue-500,
+[data-tutorial="player-pawn"] .bg-blue-600,
+[data-tutorial="player-pawn"] [class*="bg-blue"] {
+  background-color: var(--be-player-two) !important;
+  box-shadow: 0 0 14px var(--be-player-two), 0 0 4px rgba(0,0,0,0.8) !important;
+}
+
+/* ── Wall pieces ──────────────────────────────────────────────────────── */
+[id^="slot-horizontal-"] .bg-gradient-to-r,
+[id^="slot-horizontal-"] [class*="from-red"],
+[id^="slot-horizontal-"] [class*="bg-red"] {
+  background: linear-gradient(to right, var(--be-wall-a), var(--be-wall-b)) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5) !important;
+}
+
+[id^="slot-vertical-"] .bg-gradient-to-b,
+[id^="slot-vertical-"] [class*="from-red"],
+[id^="slot-vertical-"] [class*="bg-red"] {
+  background: linear-gradient(to bottom, var(--be-wall-a), var(--be-wall-b)) !important;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.5) !important;
+}
+
+/* Wall slot hover preview */
+[id^="slot-horizontal-"] > div,
+[id^="slot-vertical-"] > div {
+  background-color: var(--be-accent) !important;
+  opacity: 0.35 !important;
+}
+
+/* ── Grid intersection dots ───────────────────────────────────────────── */
+[data-tutorial="board"] .bg-gray-400\/60,
+[data-tutorial="board"] [class*="bg-gray-4"] {
+  background-color: var(--be-dot) !important;
+}
+
+/* ── Board coordinate labels ──────────────────────────────────────────── */
+[data-tutorial="board"] .text-gray-500.select-none {
+  color: var(--be-coord) !important;
+  font-weight: 600 !important;
+}
+
+/* ── Links ────────────────────────────────────────────────────────────── */
+a { color: var(--be-accent) !important; }
+a:hover { color: var(--be-accent-hover) !important; }
+
+/* ── Inputs ───────────────────────────────────────────────────────────── */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),
+select, textarea {
+  background-color: var(--be-bg-secondary) !important;
+  color: var(--be-text) !important;
+  border-color: var(--be-border) !important;
+}
+
+/* ── Injected UI Components ────────────────────────────────────────────── */
+
+/* Stats Overlay */
+#be-stats-overlay {
+  position: fixed;
+  z-index: 999999;
+  min-width: 200px;
+  background: var(--be-bg-card, #161628);
+  border: 1px solid var(--be-border, #252540);
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--be-text, #ddd6f0);
+  overflow: hidden;
+  transition: opacity 0.2s ease;
+  user-select: none;
+}
+
+#be-stats-overlay.be-pos-top-right    { top: 12px; right: 12px; }
+#be-stats-overlay.be-pos-top-left     { top: 12px; left: 12px; }
+#be-stats-overlay.be-pos-bottom-right { bottom: 12px; right: 12px; }
+#be-stats-overlay.be-pos-bottom-left  { bottom: 12px; left: 12px; }
+
+#be-stats-overlay.be-hidden { opacity: 0; pointer-events: none; }
+
+#be-stats-overlay.be-collapsed .be-overlay-body {
+  display: none;
+}
+
+.be-overlay-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: var(--be-bg-secondary, #111122);
+  border-bottom: 1px solid var(--be-border, #252540);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.be-overlay-icon { font-size: 14px; }
+
+.be-overlay-close {
+  margin-left: auto;
+  background: none !important;
+  border: none !important;
+  color: var(--be-text-muted, #7a7a99) !important;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0 4px;
+  line-height: 1;
+}
+.be-overlay-close:hover { color: var(--be-text) !important; }
+
+.be-overlay-body {
+  padding: 8px 10px;
+}
+
+.be-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--be-border, #252540);
+}
+.be-stat-row:last-child { border-bottom: none; }
+
+.be-stat-label {
+  color: var(--be-text-muted, #7a7a99);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.be-stat-value {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--be-accent, #7c5cbf);
+}
+
+/* Move History Panel */
+#be-history-panel {
+  position: fixed;
+  z-index: 999998;
+  bottom: 12px;
+  left: 12px;
+  width: 200px;
+  max-height: 300px;
+  background: var(--be-bg-card, #161628);
+  border: 1px solid var(--be-border, #252540);
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 12px;
+  color: var(--be-text, #ddd6f0);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+#be-history-panel.be-hidden { display: none; }
+
+.be-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: var(--be-bg-secondary, #111122);
+  border-bottom: 1px solid var(--be-border, #252540);
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.be-history-list {
+  list-style: decimal;
+  margin: 0;
+  padding: 8px 10px 8px 28px;
+  overflow-y: auto;
+  flex: 1;
+  color: var(--be-text-muted, #7a7a99);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+/* Turn Banner */
+#be-turn-banner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999999;
+  padding: 12px 28px;
+  background: var(--be-bg-card, #161628);
+  border: 2px solid var(--be-accent, #7c5cbf);
+  border-radius: 50px;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--be-text, #ddd6f0);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  pointer-events: none;
+  animation: be-banner-in 0.2s ease;
+}
+#be-turn-banner.be-hidden { display: none; }
+
+@keyframes be-banner-in {
+  from { opacity: 0; transform: translate(-50%, -60%); }
+  to   { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+/* Board coordinates */
+.be-coord-row {
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 9px;
+  color: var(--be-text-muted, #7a7a99);
+  pointer-events: none;
+  line-height: 1;
+  z-index: 1;
+}
+
+.be-coord-col {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  color: var(--be-text-muted, #7a7a99);
+  pointer-events: none;
+  line-height: 1;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GAME CONFIGURATOR — "Play vs Computer" modal
+   Classes from real DOM: bg-zinc-800, border-zinc-700, bg-amber-600, etc.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Modal card wrapper */
+.bg-zinc-800 {
+  background-color: var(--be-bg-card) !important;
+  border-color: var(--be-border) !important;
+  color: var(--be-text) !important;
+}
+
+/* Inner section borders */
+.border-zinc-700 {
+  border-color: var(--be-border) !important;
+}
+.border-zinc-600 {
+  border-color: var(--be-border) !important;
+}
+
+/* Muted / secondary text */
+.text-zinc-400 {
+  color: var(--be-text-muted) !important;
+}
+.text-zinc-300 {
+  color: var(--be-text-muted) !important;
+}
+
+/* Section headings inside configurator: text-white */
+.bg-zinc-800 .text-white {
+  color: var(--be-text) !important;
+}
+
+/* ── Unselected option buttons ────────────────────────────────────────── */
+/* border-zinc-600 hover:border-zinc-500 */
+button.border-zinc-600,
+button.hover\:border-zinc-500 {
+  background-color: var(--be-bg-secondary) !important;
+  border-color: var(--be-border) !important;
+  color: var(--be-text) !important;
+  transition: border-color 0.15s, background-color 0.15s !important;
+}
+button.border-zinc-600:hover {
+  border-color: var(--be-accent) !important;
+  background-color: var(--be-bg-card) !important;
+}
+
+/* ── Selected player button (red highlight) ───────────────────────────── */
+/* border-red-500 bg-red-500/20 */
+button.border-red-500 {
+  border-color: var(--be-player-one) !important;
+  background-color: color-mix(in srgb, var(--be-player-one) 20%, transparent) !important;
+  color: var(--be-text) !important;
+  box-shadow: 0 0 0 1px var(--be-player-one) !important;
+}
+
+/* ── Selected difficulty button (emerald highlight) ───────────────────── */
+/* border-emerald-400 bg-emerald-500/20 */
+button.border-emerald-400,
+button.bg-emerald-500\/20 {
+  border-color: var(--be-accent) !important;
+  background-color: color-mix(in srgb, var(--be-accent) 15%, transparent) !important;
+  color: var(--be-text) !important;
+  box-shadow: 0 0 0 1px var(--be-accent) !important;
+}
+
+/* ── "Start Game" button (amber) → accent ─────────────────────────────── */
+.bg-amber-600,
+button.bg-amber-600 {
+  background-color: var(--be-accent) !important;
+  color: #fff !important;
+  border: none !important;
+}
+.hover\:bg-amber-700:hover,
+button.bg-amber-600:hover {
+  background-color: var(--be-accent-hover) !important;
+}
+
+/* ── Cancel link ──────────────────────────────────────────────────────── */
+.bg-zinc-800 a.text-zinc-400,
+a.text-zinc-400 {
+  color: var(--be-text-muted) !important;
+}
+a.text-zinc-400:hover,
+a.hover\:text-white:hover {
+  color: var(--be-text) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HOMEPAGE & GENERAL SITE — zinc/slate color system
+   Covers nav, lobby cards, hero section, buttons throughout barricade.gg
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Dark page / section backgrounds */
+.bg-zinc-900 {
+  background-color: var(--be-bg-primary) !important;
+}
+.bg-zinc-950 {
+  background-color: var(--be-bg-primary) !important;
+}
+
+/* Card / panel surfaces */
+.bg-zinc-800 {
+  background-color: var(--be-bg-card) !important;
+}
+.bg-zinc-700 {
+  background-color: var(--be-bg-secondary) !important;
+}
+
+/* Borders */
+.border-zinc-800 { border-color: var(--be-border) !important; }
+.border-zinc-700 { border-color: var(--be-border) !important; }
+.border-zinc-600 { border-color: var(--be-border) !important; }
+
+/* Text */
+.text-zinc-100,
+.text-zinc-200 {
+  color: var(--be-text) !important;
+}
+.text-zinc-400,
+.text-zinc-500 {
+  color: var(--be-text-muted) !important;
+}
+
+/* Hover variants that lighten the zinc panels */
+.hover\:bg-zinc-700:hover {
+  background-color: var(--be-bg-secondary) !important;
+}
+.hover\:bg-zinc-800:hover {
+  background-color: var(--be-bg-card) !important;
+}
+
+/* Slate variants (used in some barricade.gg pages) */
+.bg-slate-900  { background-color: var(--be-bg-primary)   !important; }
+.bg-slate-800  { background-color: var(--be-bg-card)      !important; }
+.bg-slate-700  { background-color: var(--be-bg-secondary) !important; }
+.border-slate-700 { border-color: var(--be-border) !important; }
+.border-slate-600 { border-color: var(--be-border) !important; }
+.text-slate-400   { color: var(--be-text-muted) !important; }
+.text-slate-300   { color: var(--be-text-muted) !important; }
+
+/* Hover state for slate cards */
+.hover\:bg-slate-700:hover {
+  background-color: var(--be-bg-secondary) !important;
+}
+
+/* ── Primary / CTA buttons sitewide ──────────────────────────────────── */
+/* bg-amber-500, bg-amber-600 used for main CTAs on homepage */
+.bg-amber-500,
+.bg-amber-600 {
+  background-color: var(--be-accent) !important;
+  color: #fff !important;
+}
+.hover\:bg-amber-500:hover,
+.hover\:bg-amber-600:hover,
+.hover\:bg-amber-700:hover {
+  background-color: var(--be-accent-hover) !important;
+}
+
+/* Outline / ghost buttons with zinc borders */
+button.border-zinc-600,
+button.border-zinc-700 {
+  background-color: transparent !important;
+  border-color: var(--be-border) !important;
+  color: var(--be-text) !important;
+}
+button.border-zinc-600:hover,
+button.border-zinc-700:hover {
+  border-color: var(--be-accent) !important;
+  color: var(--be-accent) !important;
+}
+
+/* ── Navbar / header ─────────────────────────────────────────────────── */
+/* Most navbars use bg-zinc-900 border-zinc-800 which are covered above.
+   Additional logo/brand text color:                                      */
+.text-white {
+  color: var(--be-text) !important;
+}
+
+/* ── Focus rings ─────────────────────────────────────────────────────── */
+*:focus-visible {
+  outline-color: var(--be-accent) !important;
+}
